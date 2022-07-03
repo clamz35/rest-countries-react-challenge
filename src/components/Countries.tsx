@@ -1,6 +1,6 @@
 import { styled } from "@stitches/react";
 import { useAtom } from "jotai";
-import { countriesAtom } from "../stores/countries.store";
+import { countriesFiltered } from "../stores/countries.store";
 import { Country } from "./Country";
 
 const Div = styled("div", {
@@ -10,7 +10,7 @@ const Div = styled("div", {
 });
 
 export function Countries() {
-  const [countries] = useAtom(countriesAtom);
+  const [countries] = useAtom(countriesFiltered);
   return (
     <Div>
       {countries.map((country, index) => (

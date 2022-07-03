@@ -11,5 +11,5 @@ const H2 = styled("h2", {
 });
 
 export function CountryTitle({ country }: CountryTitleProps) {
-  return <H2>{country.name.official}</H2>;
+  return <H2>{country.name.common}</H2>;
 }
