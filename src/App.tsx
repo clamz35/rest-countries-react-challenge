@@ -1,10 +1,10 @@
 import { styled } from "@stitches/react";
 import { useAtom } from "jotai";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { Route, Routes } from "react-router-dom";
 import "./assets/scss/styles.scss";
 import { Home } from "./components/home";
 import { Header } from "./layout/header/Header";
-import { Button } from "./shared/Button";
 import { isDarkModeAtom } from "./stores/theme.store";
 import { themeClassName } from "./utils/theme-class-name";
 
@@ -14,6 +14,8 @@ const AppStyled = styled("div", {
   backgroundColor: "var(--clr-primary-contrast)",
   "&.dark-mode": {
     "--clr-primary": "hsl(0, 0%, 100%)",
+    "--clr-primary-300": "hsl(0, 0%, 100%)",
+    "--clr-primary-contrast-300": "hsl(209, 23%, 22%)",
     "--clr-primary-contrast": " hsl(207, 26%, 17%)",
     "--clr-secondary-contrast": " hsl(209, 23%, 22%)",
   },
@@ -25,18 +27,21 @@ const MainStyled = styled("main", {
 
 function App() {
   const [isDarkMode] = useAtom(isDarkModeAtom);
+  const queryClient = new QueryClient();
+
   return (
-    <AppStyled className={`App ${themeClassName(isDarkMode)}`}>
-      <header className="App-header">
-        <Header />
-      </header>
-      <MainStyled>
-        <Button>Back</Button>
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </MainStyled>
-    </AppStyled>
+    <QueryClientProvider client={queryClient}>
+      <AppStyled className={`App ${themeClassName(isDarkMode)}`}>
+        <header className="App-header">
+          <Header />
+        </header>
+        <MainStyled>
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </MainStyled>
+      </AppStyled>
+    </QueryClientProvider>
   );
 }
 

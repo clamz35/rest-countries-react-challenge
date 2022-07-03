@@ -1,8 +1,18 @@
+import { styled } from "@stitches/react";
+import { SearchInput } from "../shared/SearchInput";
+import { Countries } from "./Countries";
+
+const Div = styled("div", {
+  display: "flex",
+  gap: "1rem",
+  flexDirection: "column",
+});
+
 export function Home() {
   return (
-    <>
-      <h2>Welcome to the homepage!</h2>
-      <p>You can do this, I believe in you.</p>
-    </>
+    <Div>
+      <SearchInput />
+      <Countries />
+    </Div>
   );
 }

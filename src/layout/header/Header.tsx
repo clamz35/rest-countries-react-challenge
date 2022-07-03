@@ -1,7 +1,6 @@
 import { styled } from "@stitches/react";
 import { useAtom } from "jotai";
 import { isDarkModeAtom } from "../../stores/theme.store";
-import { themeClassName } from "../../utils/theme-class-name";
 import { HeaderTitle } from "./HeaderTitle";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -22,7 +21,7 @@ export function Header() {
   const [isDarkMode, setIsDarkMode] = useAtom(isDarkModeAtom);
 
   return (
-    <HeaderStyle className={themeClassName(isDarkMode)}>
+    <HeaderStyle>
       <HeaderTitle />
 
       <ThemeToggleStyled onClick={() => setIsDarkMode(!isDarkMode)}>
