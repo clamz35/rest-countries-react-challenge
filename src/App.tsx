@@ -1,11 +1,12 @@
-import { styled } from "@stitches/react";
 import { useAtom } from "jotai";
+import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Route, Routes } from "react-router-dom";
 import "./assets/scss/styles.scss";
 import { Home } from "./components/home";
 import { Header } from "./layout/header/Header";
 import { isDarkModeAtom } from "./stores/theme.store";
+import { styled } from "./utils/breakpoints";
 import { themeClassName } from "./utils/theme-class-name";
 
 const AppStyled = styled("div", {
@@ -28,6 +29,9 @@ const MainStyled = styled("main", {
 function App() {
   const [isDarkMode] = useAtom(isDarkModeAtom);
   const queryClient = new QueryClient();
+  useEffect(() => {
+    document.title = "REST countries app - React";
+  });
 
   return (
     <QueryClientProvider client={queryClient}>
