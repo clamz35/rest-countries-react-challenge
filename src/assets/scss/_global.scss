@@ -1,0 +1,16 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  line-height: 1.5;
+  background-color: var(--clr-primary-contrast);
+  color: var(--clr-primary);
+  font-family: var(--ff-1);
+  font-size: var(--fs-400);
+}
+
+#root {
+  height: 100%;
+}
