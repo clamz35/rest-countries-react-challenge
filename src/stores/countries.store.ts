@@ -22,6 +22,11 @@ export const countriesFiltered = atom(async (get: Getter) =>
 );
 
 export const countryIdAtom = atom<string | null>(null);
+countryIdAtom.onMount = (setAtom) => {
+  return () => {
+    setAtom(null);
+  };
+};
 export const countryAtom = atomWithQuery((get) => ({
   queryKey: ["countries", get(countryIdAtom)],
   initialData: null,
