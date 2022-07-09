@@ -1,13 +1,11 @@
 import { CountryInterface } from "../models/country.model";
-import { Card } from "../shared/Card";
 import { styled } from "../utils/breakpoints";
 import { CountryImage } from "./CountryImage";
 import { CountryInfos } from "./CountryInfos";
 
-const Div = styled(Card, {
+const Div = styled("div", {
   display: "flex",
   gap: "16px",
-  alignItems: "center",
   flexDirection: "column",
 });
 

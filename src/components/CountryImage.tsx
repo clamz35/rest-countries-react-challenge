@@ -14,7 +14,7 @@ const Img = styled("img", {
 export function CountryImage({ country }: CountryImageProps) {
   return (
     <>
-      <Img src={country.flags.svg} alt={`${country.name.official} Flag`} />
+      <Img src={country.flags.svg} alt={`${country.name} Flag`} />
     </>
   );
 }

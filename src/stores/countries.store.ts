@@ -7,7 +7,7 @@ export const countriesAtom = atomWithQuery((get) => ({
   queryFn: async () => {
     const res = await countriesApi.getCountries();
     return res.data.sort((a, b) => {
-      if (a.name.common < b.name.common) return -1;
+      if (a.name < b.name) return -1;
       else return 1;
     });
   },
@@ -15,10 +15,19 @@ export const countriesAtom = atomWithQuery((get) => ({
 
 export const countriesFilterQuery = atom("");
 
-export const countriesFiltered = atom((get: Getter) =>
+export const countriesFiltered = atom(async (get: Getter) =>
   get(countriesAtom).filter((country) =>
-    country.name.common
-      .toLowerCase()
-      .includes(get(countriesFilterQuery).toLowerCase())
+    country.name.toLowerCase().includes(get(countriesFilterQuery).toLowerCase())
   )
 );
+
+export const countryIdAtom = atom<string | null>(null);
+export const countryAtom = atomWithQuery((get) => ({
+  queryKey: ["countries", get(countryIdAtom)],
+  initialData: null,
+  queryFn: async ({ queryKey: [, code] }: { queryKey: any }) => {
+    if (!code) return await null;
+    const res = await countriesApi.getCountry(code);
+    return res;
+  },
+}));

@@ -1,13 +1,18 @@
+import { CountryCurrencyInterface } from "./country-currency.model";
 import { CountryFlagInterface } from "./country-flag.model";
-import { CountryNameInterface } from "./country-name.model";
+import { CountryLanguageInterface } from "./country-language.model";
 
 export interface CountryInterface {
-  name: CountryNameInterface;
+  name: string;
+  nativeName: string;
+  alpha2Code: string;
   flags: CountryFlagInterface;
   population: number;
   region: string;
   subregion: string;
-  capital: string[];
+  capital: string;
   tld: string[];
-  languages: { [key: string]: string };
+  languages: CountryLanguageInterface[];
+  currencies: CountryCurrencyInterface[];
+  borders: string[];
 }

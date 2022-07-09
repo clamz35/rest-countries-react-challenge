@@ -8,10 +8,15 @@
   --clr-secondary-500: hsl(200, 15%, 8%);
   --clr-secondary-contrast-500: hsl(0, 0%, 98%);
 
+  --clr-accent-500: hsl(0, 0%, 0%);
+  --clr-accent-contrast-500: hsl(0, 0%, 100%);
+
   --clr-primary: var(--clr-primary-500);
   --clr-primary-contrast: var(--clr-primary-contrast-500);
   --clr-secondary: var(--clr-primary-500);
   --clr-secondary-contrast: var(--clr-primary-contrast-500);
+  --clr-accent: var(--clr-accent-500);
+  --clr-accent-contrast: var(--clr-accent-contrast-500);
 
   // font-family
   --ff-1: "Nunito Sans", sans-serif;
