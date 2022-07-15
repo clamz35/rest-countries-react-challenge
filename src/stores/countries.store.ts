@@ -1,25 +1,52 @@
 import { atom, Getter } from "jotai";
 import { atomWithQuery } from "jotai/query";
 import { countriesApi } from "../api/countries.api";
+import { CountryInterface } from "../models/country.model";
+
+const sortCountries = (countries: CountryInterface[]) => {
+  return countries.sort((a, b) => {
+    if (a.name < b.name) return -1;
+    if (a.name > b.name) return 1;
+    return 0;
+  });
+};
 
 export const countriesAtom = atomWithQuery((get) => ({
   queryKey: ["countries"],
   queryFn: async () => {
     const res = await countriesApi.getCountries();
-    return res.data.sort((a, b) => {
-      if (a.name < b.name) return -1;
-      else return 1;
-    });
+    return sortCountries(res.data);
   },
+}));
+
+export const countriesRegionAtom = atom<string | null>(null);
+export const countriesByRegionAtom = atomWithQuery((get) => ({
+  queryKey: ["countries", get(countriesRegionAtom)],
+  queryFn: async ({ queryKey: [, region] }: { queryKey: any }) => {
+    if (!region) return await null;
+    const countries = await countriesApi.getCountriesByRegion(region);
+
+    if (!countries) return await null;
+    return sortCountries(countries);
+  },
+  initialData: [],
 }));
 
 export const countriesFilterQuery = atom("");
 
-export const countriesFiltered = atom(async (get: Getter) =>
-  get(countriesAtom).filter((country) =>
+export const countriesFiltered = atom(async (get: Getter) => {
+  const countriesRegion = get(countriesRegionAtom);
+  let countries: CountryInterface[] | null | undefined = get(countriesAtom);
+  if (countriesRegion) {
+    countries = get(countriesByRegionAtom);
+  }
+
+  if (!countries) return await null;
+
+  return countries?.filter((country) =>
     country.name.toLowerCase().includes(get(countriesFilterQuery).toLowerCase())
-  )
-);
+  );
+});
 
 export const countryIdAtom = atom<string | null>(null);
 countryIdAtom.onMount = (setAtom) => {

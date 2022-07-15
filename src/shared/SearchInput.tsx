@@ -1,26 +1,12 @@
 import { styled } from "@stitches/react";
 import React, { ChangeEvent } from "react";
 import { FaSearch } from "react-icons/fa";
+import { InputWrapper } from "./InputWrapper";
 
 type SearchInputProps = {
   value?: string;
   onValueChange?: (value: string) => void;
 };
-
-const SearchWrapperStyled = styled("div", {
-  display: "flex",
-  alignItems: "center",
-  gap: "1.625rem",
-  boxShadow: "0px 2px 9px rgba(0, 0, 0, 0.0532439)",
-  paddingLeft: "32px",
-  borderRadius: "5px",
-  color: "var(--clr-primary-300)",
-  backgroundColor: "var(--clr-primary-contrast-300)",
-
-  "&:focus-within": {
-    outline: "1px solid black",
-  },
-});
 
 const FaSearchStyled = styled(FaSearch, {
   flexShrink: 0,
@@ -46,7 +32,7 @@ export function SearchInput({
     onValueChange(event.target.value);
   };
   return (
-    <SearchWrapperStyled onClick={() => searchInput.current?.focus()}>
+    <InputWrapper onClick={() => searchInput.current?.focus()}>
       <FaSearchStyled />
       <InputStyled
         ref={searchInput}
@@ -56,6 +42,6 @@ export function SearchInput({
         value={value}
         onChange={handleChange}
       />
-    </SearchWrapperStyled>
+    </InputWrapper>
   );
 }

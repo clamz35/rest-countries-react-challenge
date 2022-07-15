@@ -19,6 +19,8 @@ const AppStyled = styled("div", {
     "--clr-secondary-contrast": " hsl(209, 23%, 22%)",
     "--clr-accent": "hsl(0, 0%, 100%)",
     "--clr-accent-contrast": "hsl(0, 0% ,0%)",
+    "--clr-tertiary": "hsl(0, 0% , 90%)",
+    "--clr-tertiary-contrast": "hsl(0, 0% ,0%)",
   },
 });
 

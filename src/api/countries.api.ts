@@ -19,6 +19,19 @@ class CountriesApi {
       });
   }
 
+  getCountriesByRegion(region: string): Promise<CountryInterface[] | null> {
+    return axios
+      .get<CountryInterface[]>(`https://restcountries.com/v2/region/${region}`)
+      .catch((err) => {
+        return null;
+      })
+      .then((response) => {
+        if (!response) return null;
+
+        return response.data;
+      });
+  }
+
   getCountryBorders(
     country: CountryInterface
   ): Promise<CountryInterface[] | null> {

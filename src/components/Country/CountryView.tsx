@@ -12,7 +12,7 @@ const Div = styled("div", {
   display: "flex",
   flexDirection: "column",
   gap: "2.75rem",
-  "@md": {
+  "@ld": {
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "center",

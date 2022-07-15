@@ -1,7 +1,7 @@
 import { useAtom } from "jotai";
 import { Suspense } from "react";
 import { Card } from "../shared/Card";
-import { countriesAtom } from "../stores/countries.store";
+import { countriesFiltered } from "../stores/countries.store";
 import { styled } from "../utils/breakpoints";
 import { Country } from "./Country";
 import { CountryLink } from "./Country/CountryLink";
@@ -18,7 +18,11 @@ const Div = styled("div", {
 });
 
 export function Countries() {
-  const [countries] = useAtom(countriesAtom);
+  const [countries] = useAtom(countriesFiltered);
+
+  if (countries?.length === 0) {
+    return <>No Countries</>;
+  }
   return (
     <Suspense fallback={<div>loading</div>}>
       <Div>
