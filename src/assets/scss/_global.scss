@@ -14,3 +14,9 @@ body {
 #root {
   height: 100%;
 }
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

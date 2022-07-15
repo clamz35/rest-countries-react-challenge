@@ -1,5 +1,4 @@
 import { useAtom } from "jotai";
-import { Suspense } from "react";
 import { Card } from "../shared/Card";
 import { countriesFiltered } from "../stores/countries.store";
 import { styled } from "../utils/breakpoints";
@@ -19,25 +18,22 @@ const Div = styled("div", {
 
 export function Countries() {
   const [countries] = useAtom(countriesFiltered);
-
   if (countries?.length === 0) {
     return <>No Countries</>;
   }
   return (
-    <Suspense fallback={<div>loading</div>}>
-      <Div>
-        {countries ? (
-          countries.map((country) => (
-            <CountryLink key={country.alpha2Code} country={country}>
-              <Card height="fullHeight">
-                <Country country={country} />
-              </Card>
-            </CountryLink>
-          ))
-        ) : (
-          <div>Error</div>
-        )}
-      </Div>
-    </Suspense>
+    <Div>
+      {countries ? (
+        countries.map((country) => (
+          <CountryLink key={country.alpha2Code} country={country}>
+            <Card height="fullHeight">
+              <Country country={country} />
+            </Card>
+          </CountryLink>
+        ))
+      ) : (
+        <div>Error</div>
+      )}
+    </Div>
   );
 }

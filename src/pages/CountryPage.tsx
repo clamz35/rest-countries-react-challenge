@@ -3,6 +3,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { CountryDetail } from "../components/Country/CountryDetail";
 import { Button } from "../shared/Button";
+import { Loading } from "../shared/Loading";
 import { styled } from "../utils/breakpoints";
 
 const Div = styled("div", {
@@ -25,7 +26,7 @@ export default function CountryPage() {
     navigate("/");
   }
   return (
-    <Suspense fallback={<div>Loading</div>}>
+    <Suspense fallback={<Loading />}>
       <Div>
         <ButtonStyled onClick={goToHome}>
           <FaArrowLeft />

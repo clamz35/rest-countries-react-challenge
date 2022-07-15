@@ -3,6 +3,7 @@ import { useAtom } from "jotai";
 import React from "react";
 import { Countries } from "../components/Countries";
 import { CountriesFilter } from "../components/CountriesFilter/CountriesFilter";
+import { Loading } from "../shared/Loading";
 import { SearchInput } from "../shared/SearchInput";
 import { countriesFilterQuery } from "../stores/countries.store";
 
@@ -18,7 +19,7 @@ export function CountriesPages() {
     <Div>
       <SearchInput value={search} onValueChange={setSearch} />
       <CountriesFilter />
-      <React.Suspense fallback={<div>Loading...</div>}>
+      <React.Suspense fallback={<Loading />}>
         <Countries />
       </React.Suspense>
     </Div>

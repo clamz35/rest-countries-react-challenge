@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./App";
 import { CountriesPages } from "./pages/CountriesPage";
 import reportWebVitals from "./reportWebVitals";
+import { Loading } from "./shared/Loading";
 
 const CountryPage = React.lazy(() => import("./pages/CountryPage"));
 
@@ -16,13 +17,7 @@ root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <Suspense
-          fallback={
-            <div>
-              <p>Loading...</p>
-            </div>
-          }
-        >
+        <Suspense fallback={<Loading />}>
           <Routes>
             <Route path="/" element={<App />}>
               <Route index element={<CountriesPages />} />

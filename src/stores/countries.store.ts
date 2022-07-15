@@ -19,34 +19,50 @@ export const countriesAtom = atomWithQuery((get) => ({
   },
 }));
 
+export enum CountriesState {
+  Loading = "loading",
+  Success = "success",
+  Error = "error",
+}
+
+export const countriesStateAtom = atom<CountriesState>(CountriesState.Loading);
+
 export const countriesRegionAtom = atom<string | null>(null);
 export const countriesByRegionAtom = atomWithQuery((get) => ({
   queryKey: ["countries", get(countriesRegionAtom)],
+  keepPreviousData: true,
+
   queryFn: async ({ queryKey: [, region] }: { queryKey: any }) => {
     if (!region) return await null;
+
     const countries = await countriesApi.getCountriesByRegion(region);
 
     if (!countries) return await null;
     return sortCountries(countries);
   },
-  initialData: [],
+  initialData: null,
 }));
 
 export const countriesFilterQuery = atom("");
 
-export const countriesFiltered = atom(async (get: Getter) => {
-  const countriesRegion = get(countriesRegionAtom);
-  let countries: CountryInterface[] | null | undefined = get(countriesAtom);
-  if (countriesRegion) {
-    countries = get(countriesByRegionAtom);
+export const countriesFiltered = atom(
+  async (get: Getter): Promise<CountryInterface[] | null> => {
+    const countriesRegion = await get(countriesRegionAtom);
+    let countries: CountryInterface[] | null | undefined = await get(
+      countriesAtom
+    );
+    if (countriesRegion) {
+      countries = await get(countriesByRegionAtom);
+    }
+    if (!countries) return await null;
+
+    return countries?.filter((country) =>
+      country.name
+        .toLowerCase()
+        .includes(get(countriesFilterQuery).toLowerCase())
+    );
   }
-
-  if (!countries) return await null;
-
-  return countries?.filter((country) =>
-    country.name.toLowerCase().includes(get(countriesFilterQuery).toLowerCase())
-  );
-});
+);
 
 export const countryIdAtom = atom<string | null>(null);
 countryIdAtom.onMount = (setAtom) => {
