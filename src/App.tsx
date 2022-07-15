@@ -10,12 +10,13 @@ import { themeClassName } from "./utils/theme-class-name";
 const AppStyled = styled("div", {
   height: "100%",
   color: "var(--clr-primary)",
-  backgroundColor: "var(--clr-primary-contrast)",
+  backgroundColor: "var(--clr-primary-contrast-600)",
   "&.dark-mode": {
     "--clr-primary": "hsl(0, 0%, 100%)",
     "--clr-primary-300": "hsl(0, 0%, 100%)",
     "--clr-primary-contrast-300": "hsl(209, 23%, 22%)",
     "--clr-primary-contrast": " hsl(207, 26%, 17%)",
+    "--clr-primary-contrast-600": " hsl(207, 26%, 17%)",
     "--clr-secondary-contrast": " hsl(209, 23%, 22%)",
     "--clr-accent": "hsl(0, 0%, 100%)",
     "--clr-accent-contrast": "hsl(0, 0% ,0%)",
