@@ -27,6 +27,9 @@ const AppStyled = styled("div", {
 
 const MainStyled = styled("main", {
   margin: "40px 28px",
+  "@ld": {
+    marginInline: "81px",
+  },
 });
 
 function App() {

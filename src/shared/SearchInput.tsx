@@ -11,6 +11,9 @@ type SearchInputProps = {
 const FaSearchStyled = styled(FaSearch, {
   flexShrink: 0,
 });
+const InputWrapperStyled = styled(InputWrapper, {
+  width: "min(480px, 100%)",
+});
 
 const InputStyled = styled("input", {
   border: "none",
@@ -32,7 +35,7 @@ export function SearchInput({
     onValueChange(event.target.value);
   };
   return (
-    <InputWrapper onClick={() => searchInput.current?.focus()}>
+    <InputWrapperStyled onClick={() => searchInput.current?.focus()}>
       <FaSearchStyled />
       <InputStyled
         ref={searchInput}
@@ -42,6 +45,6 @@ export function SearchInput({
         value={value}
         onChange={handleChange}
       />
-    </InputWrapper>
+    </InputWrapperStyled>
   );
 }
