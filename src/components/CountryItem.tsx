@@ -9,7 +9,7 @@ const Div = styled("div", {
   fontSize: "var(--fs-300)",
 });
 
-const LabelStyled = styled("label", {
+const LabelStyled = styled("span", {
   fontWeight: "600",
 });
 
